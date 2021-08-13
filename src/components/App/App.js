@@ -67,12 +67,18 @@ const useStyles = makeStyles({
 
 const App = ( {isAuthed, logOutUser, authUser, setStateMessage, setStateChats} ) => {
 
+  
+
   const classes = useStyles()
 
   useEffect(() => {
-
+    
+    authUser()
     setStateChats()
     setStateMessage()
+
+
+    
 
     // firebase.database().ref("chats").on("value", (snapshot) => {
     //   console.log('firebase.database().ref')
@@ -99,7 +105,7 @@ const App = ( {isAuthed, logOutUser, authUser, setStateMessage, setStateChats} )
 
     //   });
 
-    authUser()
+    
     // firebase.auth().onAuthStateChanged((user) => {
     //   console.log('firebase.auth()')
     //     if(user) {
