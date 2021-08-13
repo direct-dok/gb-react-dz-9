@@ -1,5 +1,7 @@
-import React from 'react'
+import { React } from 'react'
 import { connect } from 'react-redux'
+
+import firebase from 'firebase'
 
 // Material UI
 import { makeStyles } from '@material-ui/core/styles'
@@ -41,6 +43,9 @@ const useStyles = makeStyles({
 })
 
 const Home = ({chats, messages, addChat, addChatMessages}) => {
+
+  // firebase.database().ref("chats").child(21).set({1: 2, 3: 4})
+  // firebase.database().ref("messages").child(21).set()
 
   const classes = useStyles()
 

@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from 'react';
+import { React } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -25,11 +25,6 @@ import { getProfile } from '../../store/selectors/getProfile'
 
 // Action creators
 import isAuthProfileAction from '../../store/actionCreators/is_auth_profile_action'
-
-// Thunk
-import { checkAuthThunk } from '../../store/thunk/checkAuthThunk'
-import { setStateMessageThunk } from '../../store/thunk/setStateMessageThunk'
-import { setStateChatsThunk } from '../../store/thunk/setStateChatsThunk'
 
 // Material UI
 import { makeStyles } from '@material-ui/core/styles'
@@ -65,119 +60,16 @@ const useStyles = makeStyles({
   
 });
 
-const App = ( {isAuthed, logOutUser, authUser, setStateMessage, setStateChats} ) => {
-
-  
+const App = ( {isAuthed, logOutUser} ) => {
 
   const classes = useStyles()
-
-  useEffect(() => {
-    
-    authUser()
-    setStateChats()
-    setStateMessage()
-
-
-    
-
-    // firebase.database().ref("chats").on("value", (snapshot) => {
-    //   console.log('firebase.database().ref')
-    //   const messages = [];
-    //   snapshot.forEach((snap) => {
-    //     messages.push(snap.val());
-    //   });
-    
-    //   console.log(snapshot.key, messages);
-    // });
-          
-    // firebase.database().ref("messages").on("value", (snapshot) => {
-    //   console.log('firebase.database().ref')
-    //   const messages = {};
-    //   let index = 1;
-
-    //   snapshot.forEach((snap) => {
-    //     messages[index++] = snap.val();
-    //     console.log(snap.val())
-    //     // messages.push(snap.val());
-    //   });
-
-    //   console.log(snapshot.key, messages);
-
-    //   });
-
-    
-    // firebase.auth().onAuthStateChanged((user) => {
-    //   console.log('firebase.auth()')
-    //     if(user) {
-    //       logOutUser(true)
-
-    //       // firebase.database().ref("chats").on("value", (snapshot) => {
-    //       //   console.log('firebase.database().ref')
-    //       //   const messages = [];
-    //       //   snapshot.forEach((snap) => {
-    //       //     messages.push(snap.val());
-    //       //   });
-          
-    //       //   console.log(snapshot.key, messages);
-    //       // });
-          
-    //       firebase.database().ref("messages").on("value", (snapshot) => {
-    //         console.log('firebase.database().ref')
-    //         const messages = {};
-    //         let index = 1;
-
-    //         snapshot.forEach((snap) => {
-    //           messages[index++] = snap.val();
-    //           console.log(snap.val())
-    //           // messages.push(snap.val());
-    //         });
-          
-    //         console.log(snapshot.key, messages);
-    //       });
-
-    //       // firebase.database().ref("messages").child(1).child('m4').set(
-    //       //     {
-    //       //         name: "Ethan", 
-    //       //         message: "I will see this video later. Now I have php course to study", 
-    //       //         date: "1628830555",
-    //       //         sender: "robot"
-    //       //       }
-    //       //   )
-
-    //       // firebase.database().ref("messages").child(1).child('m4').push(
-    //       //   {
-    //       //       name: "Ethan", 
-    //       //       message: "I will see this video later. Now I have php course to study", 
-    //       //       date: "1628830555",
-    //       //       sender: "robot"
-    //       //     }
-    //       // )
-
-    //       // firebase.database().ref("messages").child(1).push({
-    //       //   name: "Ethan", 
-    //       //   message: "I will see this video later. Now I have php course to study", 
-    //       //   date: "1628830555",
-    //       //   sender: "robot"
-    //       // })
-    //       // firebase.database().ref().child('messages').push().key;
-          
-    //     }
-    // })
-
-    
-    
-  }, [])
 
   const logOut = (e) => {
     e.preventDefault()
 
     logOutUser(false)
     firebase.auth().signOut()
-    // .then(() => {
-    //   // Sign-out successful.
-    // }).catch((error) => {
-    //   // An error happened.
-    // });
+
   }
 
   return (
@@ -251,10 +143,7 @@ const mapStateToProps = (store) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    logOutUser: (payload) => dispatch(isAuthProfileAction(payload)),
-    authUser: () => dispatch(checkAuthThunk()),
-    setStateMessage: () => dispatch(setStateMessageThunk()), 
-    setStateChats: () => dispatch(setStateChatsThunk())
+    logOutUser: (payload) => dispatch(isAuthProfileAction(payload))
   }
 }
 

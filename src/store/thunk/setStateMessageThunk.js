@@ -12,7 +12,6 @@ export const setStateMessageThunk = () => {
       
             snapshot.forEach((snap) => {
               messages[index++] = snap.val();
-              console.log(snap.val())
             });
 
             dispatch(setStateMessages(messages)) // Dispatch

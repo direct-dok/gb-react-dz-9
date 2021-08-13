@@ -1,7 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
-
-
-
+import React, { useState } from 'react';
 
 // Material UI
 import { makeStyles } from '@material-ui/core/styles';
@@ -42,7 +39,6 @@ const useStyles = makeStyles({
   paper: {
     width: '400px',
     backgroundColor: '#fff',
-    // boxShadow: theme.shadows[5],
     padding: '30px',
   }, 
   field: {

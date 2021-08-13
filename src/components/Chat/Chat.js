@@ -20,9 +20,6 @@ import Grid from '@material-ui/core/Grid'
 import Message from '../Message'
 import ChatList from '../ChatList'
 
-// Action Creator
-import addNewMessage from '../../store/actionCreators/add_message_action'
-
 // Selectors
 import { getChats } from '../../store/selectors/getChats'
 import { getMessage } from '../../store/selectors/getMessage'

@@ -12,7 +12,7 @@ export const checkAuthThunk = () => {
               } else {
                   dispatch(isAuthProfileAction(false))
               }
-              
+
         })
 
     }
