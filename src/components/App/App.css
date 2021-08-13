@@ -1,0 +1,52 @@
+.App {
+  max-width: 600px;
+  margin: 30px auto;
+}
+
+.App__title {
+  font-size: 2.8em;
+  line-height: 1em;
+  border-bottom: 1px solid #333;
+  margin: 0 0 .6em 0;
+  padding: 0 0 0.6em 0;
+}
+
+
+.form-send {
+  width: 100%;
+}
+
+.form-send__wrapper-input {
+  margin: 0 0 10px 0;
+}
+
+.form-send__user-name {
+  height: 40px;
+  padding: 0 10px;
+}
+
+.form-send__wrapper-input input, 
+.form-send__wrapper-input textarea {
+  font-family: 'Montserrat', sans-serif;
+  width: 100%;
+  border: 1px solid #e3e3e3;
+  outline: none;
+}
+
+.form-send__textarea-message {
+  height: 100px;
+  padding: 15px 10px;
+}
+
+.form-send__send-button {
+  font-family: 'Montserrat', sans-serif;
+  height: 40px;
+  width: 120px;
+  background: #1f68a3;
+  color: #fff;
+  border: none;
+}
+
+.form-send__send-button:hover {
+  cursor: pointer;
+}

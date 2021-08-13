@@ -1,0 +1,3 @@
+const SET_STATE_CHATS = 'SET_STATE_CHATS'
+
+export default SET_STATE_CHATS

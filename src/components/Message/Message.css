@@ -1,0 +1,22 @@
+.message__items {
+    border-radius: 30px;
+    padding: 1.2em;
+    margin: 0 0 1em 0;
+}
+
+.message__name {
+    font-weight: 900;
+    font-size: 0.8em;
+}
+
+.message__content {
+    margin: 10px 0 0 0;
+}
+
+.user-message {
+    background: #f5e8f9;
+}
+
+.robot-message {
+    background: #e3c5eb;
+}

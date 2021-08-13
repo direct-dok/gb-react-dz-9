@@ -1,0 +1,3 @@
+const IS_AUTH_PROFILE = 'IS_AUTH_PROFILE'
+
+export default IS_AUTH_PROFILE
