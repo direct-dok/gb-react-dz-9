@@ -17,6 +17,9 @@ import AddChat from '../AddChat'
 import { addNewChat } from '../../store/actionCreators/add_chats_action'
 import { addNewChatMessages } from '../../store/actionCreators/add_new_chat_messages_action'
 
+// Thunk
+import { addNewChatThunk } from '../../store/thunk/addNewChatThunk'
+
 // Selectors 
 import { getChats } from '../../store/selectors/getChats'
 import { getMessage } from '../../store/selectors/getMessage'
@@ -44,22 +47,34 @@ const useStyles = makeStyles({
 
 const Home = ({chats, messages, addChat, addChatMessages}) => {
 
-  // firebase.database().ref("chats").child(21).set({1: 2, 3: 4})
-  // firebase.database().ref("messages").child(21).set()
+  // firebase.database().ref("chats").child(21).set({})
+  // firebase.database().ref("messages").child(21).set({})
+
+  console.log(chats)
 
   const classes = useStyles()
 
   const addChats = (name, status, message) => {
 
+    const chatId = chats[chats.length - 1].id + 1
+
     const obj = {
-      id: chats[chats.length - 1].id + 1, 
+      id: chatId, 
       status: status, 
       name: name, 
-      avatar: '', 
+      avatar: '/img/avatar/default-avatar.png', 
       message: message
     }
-    addChat(obj)
-    addChatMessages(chats[chats.length - 1].id + 1)
+
+    const payload = {obj, chatId, name}
+
+    console.log(payload)
+
+
+    // console.log('chats[chats.length - 1].id + 1', chats[chats.length - 1].id + 1)
+
+    addChat(payload)
+    // addChatMessages(chats[chats.length - 1].id + 1)
     
   }
 
@@ -94,8 +109,7 @@ const mapStateToProps = (store) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addChat: (payload) => dispatch(addNewChat(payload)), 
-    addChatMessages: (payload) => dispatch(addNewChatMessages(payload))
+    addChat: (payload) => dispatch(addNewChatThunk(payload))
   }
 }
 
