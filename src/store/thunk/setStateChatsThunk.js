@@ -7,18 +7,14 @@ export const setStateChatsThunk = () => {
 
         firebase.database().ref("chats").on("value", (snapshot) => {
 
-            console.log('firebase.database().ref')
             const messages = [];
             snapshot.forEach((snap) => {
                 messages.push(snap.val());
             });
             
             dispatch(setStateChats(messages))
-            console.log(snapshot.key, messages);
 
         });
-
-        // dispatch(isAuthProfileAction())
 
     }
 }

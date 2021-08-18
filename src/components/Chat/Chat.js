@@ -20,15 +20,13 @@ import Grid from '@material-ui/core/Grid'
 import Message from '../Message'
 import ChatList from '../ChatList'
 
-// Action Creator
-import addNewMessage from '../../store/actionCreators/add_message_action'
-
 // Selectors
 import { getChats } from '../../store/selectors/getChats'
 import { getMessage } from '../../store/selectors/getMessage'
 
 // Thunk 
 import { addRobotMessageThunkCreator } from '../../store/thunk/addRobotMessageThunk'
+import { addNewMessageThunk } from '../../store/thunk/addNewMessageThunk'
 
 
 
@@ -156,8 +154,9 @@ const Chat = ({chats, chatMessages, addMessage, addMessageRobot}) => {
   useEffect(() => {
 
     if(authorList.length) {
-      const obj = {...chatMessages[id], [`m${Object.keys(chatMessages[id]).length + 1}`]: {name: user.name, message: 'Hi i am a robot i always answer. You can ask me what you want', date: Date.now() / 1000, sender: 'robot'}}
-      const objPayload = {obj, id}
+      const idMessage = `m${Object.keys(chatMessages[id]).length + 1}`
+      const obj = {...chatMessages[id], [idMessage]: {name: user.name, message: 'Hi i am a robot i always answer. You can ask me what you want', date: Date.now() / 1000, sender: 'robot'}}
+      const objPayload = {obj, id, idMessage}
       addMessageRobot(objPayload)
     }
 
@@ -172,8 +171,10 @@ const Chat = ({chats, chatMessages, addMessage, addMessageRobot}) => {
 
       setAuthorList((oldArray) => [...oldArray, authorField])
 
-      const obj = {...chatMessages[id], [`m${Object.keys(chatMessages[id]).length + 1}`]: {name: authorField, message: messageFied, date: Date.now() / 1000, sender: 'user'}}
-      const objPayload = {obj, id}
+      const idMessage = `m${Object.keys(chatMessages[id]).length + 1}`
+
+      const obj = {...chatMessages[id], [idMessage]: {name: authorField, message: messageFied, date: Date.now() / 1000, sender: 'user'}}
+      const objPayload = {obj, id, idMessage}
 
       addMessage(objPayload)
 
@@ -274,7 +275,7 @@ const mapStateToProps = (store) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addMessage: (payload) => dispatch(addNewMessage(payload)), 
+    addMessage: (payload) => dispatch(addNewMessageThunk(payload)), 
     addMessageRobot: (chatMessages, id) => dispatch(addRobotMessageThunkCreator(chatMessages, id))
   }
 }

@@ -1,5 +1,8 @@
 import { useState } from 'react'
-import { useSelector } from 'react-redux';
+import { 
+    useSelector, 
+    connect
+} from 'react-redux';
 import clsx from 'clsx';
 import {
     Redirect
@@ -7,6 +10,11 @@ import {
 
 // Firebase 
 import firebase from 'firebase';
+
+// Thunk
+import { checkAuthThunk } from '../../store/thunk/checkAuthThunk'
+import { setStateMessageThunk } from '../../store/thunk/setStateMessageThunk'
+import { setStateChatsThunk } from '../../store/thunk/setStateChatsThunk'
 
 // Material UI
 import { makeStyles } from '@material-ui/core/styles'
@@ -43,7 +51,7 @@ const useStyles = makeStyles({
     }
 })
 
-const Login = () => {
+const Login = ({ authUser, setStateMessage, setStateChats }) => {
 
     const classes = useStyles();
 
@@ -95,21 +103,9 @@ const Login = () => {
                         textError: '',
                     })
 
-                    
-
-                    // setTimeout( () => {
-
-                    //     setValues({ 
-                    //         ...values, 
-                    //         login: '', 
-                    //         password: '',
-                    //         sucess: false, 
-                    //         textSuccess: '', 
-                    //         error: false, 
-                    //         textError: '', 
-                    //     })
-
-                    // }, 3000 )
+                    authUser() // Изменяем состояние на авторизован
+                    setStateChats() // Получаем список чатов
+                    setStateMessage() // Получаем список сообщений
 
                 }
 
@@ -215,4 +211,12 @@ const Login = () => {
 
 }
 
-export default Login
+const mapDispatchToProps = (dispatch) => {
+    return {
+      authUser: () => dispatch(checkAuthThunk()),
+      setStateMessage: () => dispatch(setStateMessageThunk()), 
+      setStateChats: () => dispatch(setStateChatsThunk())
+    }
+  }
+
+export default connect(null, mapDispatchToProps)(Login)
